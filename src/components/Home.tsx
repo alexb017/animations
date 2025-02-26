@@ -9,7 +9,7 @@ export default function Home() {
           <Link to="/simple" className="link">
             Simple
           </Link>
-          <Link to="/a2" className="link">
+          <Link to="/transforms" className="link">
             Transforms
           </Link>
           <Link to="/a3" className="link">

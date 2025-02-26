@@ -1,11 +1,16 @@
 import { Link } from 'react-router';
 import * as motion from 'motion/react-client';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 export default function Simple() {
   return (
     <div className="simple">
       <div className="a-content">
-        <h1>Simple</h1>
+        <div className="top">
+          <h1>Simple (popup)</h1>
+          <Link to="/">Home</Link>
+        </div>
+        {/* Popup animation */}
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -15,12 +20,15 @@ export default function Simple() {
           }}
           style={ball}
         />
+        {/* End animation */}
         <div className="nav-btns">
           <Link to="/" className="btn">
+            <ChevronLeftIcon style={{ width: '16px' }} />
             Home
           </Link>
-          <Link to="/a2" className="btn">
+          <Link to="/transforms" className="btn">
             Transforms
+            <ChevronRightIcon style={{ width: '16px' }} />
           </Link>
         </div>
       </div>
@@ -28,6 +36,7 @@ export default function Simple() {
   );
 }
 
+// Styles for the ball
 const ball = {
   width: 100,
   height: 100,
