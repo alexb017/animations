@@ -12,13 +12,13 @@ export default function Home() {
           <Link to="/transforms" className="link">
             Transforms
           </Link>
-          <Link to="/a3" className="link">
+          <Link to="/springs" className="link">
             Springs
           </Link>
-          <Link to="/a4" className="link">
+          <Link to="/exit-animation" className="link">
             Exit animations
           </Link>
-          <Link to="/a5" className="link">
+          <Link to="/layout" className="link">
             Layout animations
           </Link>
           <Link to="/a6" className="link">
