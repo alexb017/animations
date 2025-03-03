@@ -21,6 +21,12 @@ export default function Home() {
           <Link to="/layout" className="link">
             Layout animations
           </Link>
+          <Link to="/layout-with-text" className="link">
+            Layout with text
+          </Link>
+          <Link to="/layout-with-cards" className="link">
+            Layout with cards
+          </Link>
           <Link to="/a6" className="link">
             Gestures
           </Link>
