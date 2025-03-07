@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import * as motion from 'motion/react-client';
+import { motion } from 'motion/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 export default function Simple() {
@@ -7,27 +7,46 @@ export default function Simple() {
     <div className="simple">
       <div className="a-content">
         <div className="top">
-          <h1>Simple (popup)</h1>
-          <Link to="/">Home</Link>
+          <h1>Simple fade in with pulse effect while hover</h1>
+          <Link to="/">Go Home</Link>
         </div>
+
         {/* Popup animation */}
         <motion.div
-          initial={{ opacity: 0, scale: 0 }}
+          initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
-            duration: 0.4,
-            scale: { type: 'spring', visualDuration: 0.4, bounce: 0.5 },
+            duration: 0.8,
+            delay: 0.2,
+            ease: [0, 0.71, 0.2, 1.01],
           }}
-          style={ball}
+          whileHover={{
+            scale: [1, 1.1, 1],
+            transition: {
+              scale: {
+                duration: 0.8,
+                repeat: Infinity,
+                repeatType: 'loop',
+                ease: 'easeInOut',
+              },
+            },
+          }}
+          style={{
+            width: '100px',
+            height: '100px',
+            backgroundColor: 'var(--orange)',
+            borderRadius: '50%',
+          }}
         />
         {/* End animation */}
+
         <div className="nav-btns">
           <Link to="/" className="btn">
             <ChevronLeftIcon style={{ width: '16px' }} />
             Home
           </Link>
-          <Link to="/transforms" className="btn">
-            Transforms
+          <Link to="/layout-with-cards" className="btn">
+            Layout with cards
             <ChevronRightIcon style={{ width: '16px' }} />
           </Link>
         </div>
@@ -35,11 +54,3 @@ export default function Simple() {
     </div>
   );
 }
-
-// Styles for the ball
-const ball = {
-  width: 100,
-  height: 100,
-  background: '#dd00ee',
-  borderRadius: '50%',
-};

@@ -1,86 +1,114 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
-export default function AnimatedCard({
-  id,
-  imageUrl,
-  title,
-  subtitle,
-  description,
-}: {
+interface Image {
   id: string;
-  imageUrl: string;
+  src: string;
+  alt: string;
   title: string;
-  subtitle: string;
   description: string;
-}) {
-  const [isOpen, setIsOpen] = useState(false);
+  subtitle: string;
+}
+
+export default function AnimatedCard({ images }: { images: Image[] }) {
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   return (
     <>
-      <motion.div
-        layoutId={`card-${id}`}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-        whileHover={{ scale: 1.02 }}
-        onClick={() => setIsOpen(true)}
+      {/* grid images */}
+      <div
         style={{
-          position: 'relative',
-          height: '300px',
-          width: '100%',
-          overflow: 'hidden',
-          borderRadius: '20px',
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignContent: 'flex-start',
+          gap: '16px',
         }}
       >
-        <motion.div
-          layoutId={`card-image-container-${id}`}
-          style={{
-            position: 'relative',
-            height: '300px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'stretch',
-            overflow: 'hidden',
-          }}
-        >
-          <motion.img
-            layoutId={`card-image-${id}`}
-            src={imageUrl}
-            alt="Card image"
-            style={{ objectFit: 'cover', height: '100%', width: '100%' }}
-          />
-        </motion.div>
-        <motion.div
-          layoutId={`card-title-container-${id}`}
-          style={{
-            position: 'absolute',
-            top: '16px',
-            left: '16px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-          }}
-        >
-          <motion.p
-            layoutId={`card-subtitle-${id}`}
-            style={{
-              fontSize: '12px',
-              color: 'white',
-              textTransform: 'uppercase',
-            }}
-          >
-            {subtitle}
-          </motion.p>
-          <motion.h2
-            layoutId={`card-title-${id}`}
-            style={{ fontSize: '24px', color: 'white' }}
-          >
-            {title}
-          </motion.h2>
-        </motion.div>
-      </motion.div>
+        {images.map((image: Image) => (
+          <motion.div key={image.id} className="card">
+            <motion.div
+              layoutId={`card-${image.id}`}
+              transition={{ duration: 0.3 }}
+              onClick={() => setSelectedId(image.id)}
+              style={{
+                position: 'relative',
+                width: '100%',
+                height: '100%',
+                overflow: 'hidden',
+                borderRadius: '20px',
+                pointerEvents: 'auto',
+                backgroundColor: 'var(--black)',
+                zIndex: 1,
+              }}
+            >
+              <motion.div
+                layoutId={`card-image-container-${image.id}`}
+                style={{
+                  position: 'relative',
+                  height: '300px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'stretch',
+                  overflow: 'hidden',
+                }}
+              >
+                <motion.img
+                  layoutId={`card-image-${image.id}`}
+                  src={image.src}
+                  alt="Card image"
+                  style={{ objectFit: 'cover', height: '100%', width: '100%' }}
+                />
+              </motion.div>
+              <motion.div
+                layoutId={`card-title-container-${image.id}`}
+                style={{
+                  position: 'absolute',
+                  top: '16px',
+                  left: '16px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                }}
+              >
+                <motion.p
+                  layoutId={`card-subtitle-${image.id}`}
+                  style={{
+                    fontSize: '12px',
+                    color: 'var(--white)',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {image.subtitle}
+                </motion.p>
+                <motion.h2
+                  layoutId={`card-title-${image.id}`}
+                  style={{ fontSize: '24px', color: 'var(--white)' }}
+                >
+                  {image.title}
+                </motion.h2>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        ))}
+      </div>
+
+      <style>
+        {`
+          .card {
+            position: relative;
+            height: 300px;
+            padding: 0;
+            flex: 0 0 40%;
+          }
+          .card:nth-child(4n + 1),
+          .card:nth-child(4n + 4) {
+            flex: 0 1 calc(60% - 16px) !important;
+          }
+        `}
+      </style>
 
       <AnimatePresence>
-        {isOpen && (
+        {selectedId && (
           <>
             <motion.div
               initial={{ opacity: 0 }}
@@ -90,16 +118,12 @@ export default function AnimatedCard({
                 position: 'fixed',
                 inset: 0,
                 background: 'rgba(0, 0, 0, 0.8)',
-                zIndex: 99,
+                zIndex: 999,
                 willChange: 'opacity',
               }}
-              onClick={() => setIsOpen(false)}
+              onClick={() => setSelectedId(null)}
             />
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
               style={{
                 position: 'fixed',
                 left: '0px',
@@ -107,7 +131,7 @@ export default function AnimatedCard({
                 right: '0px',
                 width: '100%',
                 height: '100%',
-                zIndex: 100,
+                zIndex: 1000,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -116,13 +140,13 @@ export default function AnimatedCard({
               }}
             >
               <motion.div
-                layoutId={`card-${id}`}
+                layoutId={`card-${selectedId}`}
                 style={{
                   position: 'relative',
                   width: 'unset',
                   height: 'unset',
                   maxWidth: '400px',
-                  backgroundColor: 'black',
+                  backgroundColor: 'var(--black)',
                   overflow: 'hidden',
                   borderRadius: '20px',
                   margin: '0 auto',
@@ -130,16 +154,17 @@ export default function AnimatedCard({
                 }}
               >
                 <motion.div
-                  layoutId={`card-image-container-${id}`}
+                  layoutId={`card-image-container-${selectedId}`}
                   style={{
                     position: 'relative',
                     height: '300px',
                     overflow: 'hidden',
+                    zIndex: 1,
                   }}
                 >
                   <motion.img
-                    layoutId={`card-image-${id}`}
-                    src={imageUrl}
+                    layoutId={`card-image-${selectedId}`}
+                    src={images.find((image) => image.id === selectedId)?.src}
                     alt="Card image"
                     style={{
                       objectFit: 'cover',
@@ -149,7 +174,7 @@ export default function AnimatedCard({
                   />
                 </motion.div>
                 <motion.div
-                  layoutId={`card-title-container-${id}`}
+                  layoutId={`card-title-container-${selectedId}`}
                   style={{
                     position: 'absolute',
                     top: '32px',
@@ -157,27 +182,33 @@ export default function AnimatedCard({
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'flex-start',
+                    zIndex: 1,
                   }}
                 >
                   <motion.p
-                    layoutId={`card-subtitle-${id}`}
+                    layoutId={`card-subtitle-${selectedId}`}
                     style={{
                       fontSize: '12px',
-                      color: 'white',
+                      color: 'var(--white)',
                       textTransform: 'uppercase',
                     }}
                   >
-                    {subtitle}
+                    {images.find((image) => image.id === selectedId)?.subtitle}
                   </motion.p>
                   <motion.h2
-                    layoutId={`card-title-${id}`}
-                    style={{ fontSize: '24px', color: 'white' }}
+                    layoutId={`card-title-${selectedId}`}
+                    style={{ fontSize: '24px', color: 'var(--white)' }}
                   >
-                    {title}
+                    {images.find((image) => image.id === selectedId)?.title}
                   </motion.h2>
                 </motion.div>
                 <motion.div style={{ padding: '32px' }}>
-                  <p style={{ color: 'white' }}>{description}</p>
+                  <p style={{ color: 'var(--white)' }}>
+                    {
+                      images.find((image) => image.id === selectedId)
+                        ?.description
+                    }
+                  </p>
                 </motion.div>
               </motion.div>
             </motion.div>

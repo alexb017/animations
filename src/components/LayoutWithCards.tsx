@@ -57,53 +57,20 @@ export default function LayoutWithCards() {
       <div className="a-content">
         <div className="top">
           <h1>Layout with cards</h1>
-          <Link to="/">Home</Link>
+          <Link to="/">Go Home</Link>
         </div>
-        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-          <div style={{ flex: '0 1 calc(60% - 16px)' }}>
-            <AnimatedCard
-              id={images[0].id}
-              imageUrl={images[0].src}
-              title={images[0].title}
-              subtitle={images[0].subtitle}
-              description={images[0].description}
-            />
-          </div>
-          <div style={{ flex: '0 0 40%' }}>
-            <AnimatedCard
-              id={images[1].id}
-              imageUrl={images[1].src}
-              title={images[1].title}
-              subtitle={images[1].subtitle}
-              description={images[1].description}
-            />
-          </div>
-          <div style={{ flex: '0 0 40%' }}>
-            <AnimatedCard
-              id={images[2].id}
-              imageUrl={images[2].src}
-              title={images[2].title}
-              subtitle={images[2].subtitle}
-              description={images[2].description}
-            />
-          </div>
-          <div style={{ flex: '0 1 calc(60% - 16px)' }}>
-            <AnimatedCard
-              id={images[3].id}
-              imageUrl={images[3].src}
-              title={images[3].title}
-              subtitle={images[3].subtitle}
-              description={images[3].description}
-            />
-          </div>
-        </div>
+
+        {/* Animated cards */}
+        <AnimatedCard images={images} />
+        {/* End animated cards */}
+
         <div className="nav-btns">
-          <Link to="/layout-with-text" className="btn">
+          <Link to="/simple" className="btn">
             <ChevronLeftIcon style={{ width: '16px' }} />
-            Layout with text
+            Simple
           </Link>
-          <Link to="/layout-with" className="btn">
-            Layout
+          <Link to="/" className="btn">
+            ...
             <ChevronRightIcon style={{ width: '16px' }} />
           </Link>
         </div>

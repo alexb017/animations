@@ -38,6 +38,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  gap: 96px;
   height: 100vh;
   padding: 32px 0;
 }
@@ -46,6 +47,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 8px;
 }
 
 .nav-btns {
@@ -58,10 +60,17 @@
   align-items: center;
   gap: 2px;
   padding: 6px 8px;
+  font-size: 12px;
   line-height: 1;
   border-radius: 8px;
+  color: var(--black);
+  text-transform: uppercase;
   background-color: var(--light-gray);
   transition: transform 0.25s ease;
+}
+
+.btn svg {
+  color: var(--gray);
 }
 
 .nav-btns .btn:nth-child(1) {

@@ -7,18 +7,12 @@
   --light-gray: #f9f9f9;
   --medium-gray: #e0e0e0;
   --dark-gray: #1a1a1a;
-  --purple: #646cff;
-  --light-purple: #747bff;
-  --dark-purple: #535bf2;
+  --orange: #f77e0d;
 }
 
 a {
-  font-weight: 500;
-  color: var(--purple);
-  text-decoration: inherit;
-}
-a:hover {
-  color: var(--dark-purple);
+  color: var(--orange);
+  text-decoration: none;
 }
 
 body {
@@ -44,23 +38,10 @@ body {
 h1 {
   font-size: 24px;
   line-height: 1.1;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -1px;
 }
 
 button {
   all: unset;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--dark-gray);
-    background-color: var(--white);
-  }
-  a:hover {
-    color: var(--light-purple);
-  }
-  button {
-    background-color: var(--light-gray);
-  }
 }
