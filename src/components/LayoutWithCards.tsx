@@ -69,8 +69,8 @@ export default function LayoutWithCards() {
             <ChevronLeftIcon style={{ width: '16px' }} />
             Simple
           </Link>
-          <Link to="/" className="btn">
-            ...
+          <Link to="/transform-layout" className="btn">
+            Transform layout
             <ChevronRightIcon style={{ width: '16px' }} />
           </Link>
         </div>
