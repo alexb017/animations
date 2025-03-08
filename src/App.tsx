@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 import Home from './components/Home';
 import Simple from './components/Simple';
 import LayoutWithCards from './components/LayoutWithCards';
-import TransformLayout from './components/TransformLayout';
+import LayoutTransform from './components/LayoutTransform';
+import MenuTransition from './components/MenuTransition';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/simple" element={<Simple />} />
           <Route path="/layout-with-cards" element={<LayoutWithCards />} />
-          <Route path="/transform-layout" element={<TransformLayout />} />
+          <Route path="/layout-transform" element={<LayoutTransform />} />
+          <Route path="/menu-transition" element={<MenuTransition />} />
         </Routes>
       </main>
     </BrowserRouter>

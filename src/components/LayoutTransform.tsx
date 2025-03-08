@@ -8,7 +8,7 @@ enum LayoutType {
   half = 'half',
 }
 
-export default function TransformLayout() {
+export default function LayoutTransform() {
   const [layout, setLayout] = useState<LayoutType>(LayoutType.full);
 
   const handleLayoutChange = () => {
@@ -80,8 +80,8 @@ export default function TransformLayout() {
             <ChevronLeftIcon style={{ width: '16px' }} />
             Layout with cards
           </Link>
-          <Link to="/" className="btn">
-            ...
+          <Link to="/menu-transition" className="btn">
+            Menu Transition
             <ChevronRightIcon style={{ width: '16px' }} />
           </Link>
         </div>

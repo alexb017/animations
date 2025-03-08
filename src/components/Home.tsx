@@ -12,8 +12,11 @@ export default function Home() {
           <Link to="/layout-with-cards" className="link">
             Layout with cards
           </Link>
-          <Link to="/transform-layout" className="link">
-            Transform layout
+          <Link to="/layout-transform" className="link">
+            Layout transform
+          </Link>
+          <Link to="/menu-transition" className="link">
+            Menu transition
           </Link>
         </div>
       </div>
